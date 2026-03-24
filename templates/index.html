@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ticket Management System{% endblock %}
+{% block content %}
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div class="d-flex align-items-center">
+            <h3 class="mb-0">
+                <img src="{% static 'assets/WhatsApp_Image_2026-02-13_at_8.16.00_PM-removebg-preview.png' %}" alt="Logo"
+                    class="img-fluid" style="width: 200px; height: auto;">
+            </h3>
+        </div>
+    </header>
+
+    <main class="px-3">
+        <h1>ECHOES OF HOME.</h1>
+        <p class="lead">
+            Bringing that African and Specifically Nigerian Memories of Culture, Heritage and Core Values through music and
+            super Performances from Incredible Artists.
+        </p>
+        <p class="lead">
+            <a href="{% url 'ticket' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Get Ticket</a>
+        </p>
+    </main>
+    <footer class="mt-auto text-white-50">
+        <p>
+            Cover template for
+            <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>,
+            by <a href="https://x.com/mdo" class="text-white">@mdo</a>.
+        </p>
+    </footer>
+</div>
+
+{% endblock %}
