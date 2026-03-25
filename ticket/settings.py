@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-cp&25ns120npek!j@ugo(7r+a=qcy_y^gy+or%_8^_t2f1&%(8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ticketcustodian.onrender.com']
 
 
 # Application definition
