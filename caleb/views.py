@@ -93,16 +93,16 @@ def create_purchase_view(request, ticket_id):
         if res.get("status") == "SUCCESS":
             return redirect(res["data"]["payments"]["redirectLink"])
 
-        return render(request, "payment_error.html", {"message": res})
+        return render(request, "Payment_error.html", {"message": res})
 
 
 def seerbit_callback(request, purchase_id):
-    reference = request.GET.get("paymentReference")
+    reference = request.GET.get("PaymentReference")
 
     purchase = get_purchase_by_id_and_reference(purchase_id, reference)
 
     if not purchase:
-        return render(request, "payment_error.html")
+        return render(request, "Payment_error.html")
 
     res = verify_payment(reference)
 
@@ -110,6 +110,6 @@ def seerbit_callback(request, purchase_id):
         mark_as_paid(purchase)
         send_receipt_email(purchase)
 
-        return render(request, "payment_success.html", {"purchase": purchase})
+        return render(request, "Payment_success.html", {"purchase": purchase})
 
-    return render(request, "payment_error.html")
+    return render(request, "Payment_error.html")
