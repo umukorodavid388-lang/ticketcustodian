@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cp&25ns120npek!j@ugo(7r+a=qcy_y^gy+or%_8^_t2f1&%(8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['ticketcustodian.onrender.com']
+ALLOWED_HOSTS = ['https://ticketcustodian.onrender.com']
 
 
 # Application definition
@@ -130,9 +130,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SEERBIT_PUBLIC_KEY = "SBTESTPUBK_ENFPO3DD0SimoU4dk4EZDzSx0oqUWXsQ"
-SEERBIT_SECRET_KEY = "SBTESTSECK_sozHH39lYH4rgJ3Ee38ZLbnEJDhX4aFZlaaKGOo4"
-DOMAIN = "http://127.0.0.1:8000"  # change in production
+SEERBIT_PUBLIC_KEY = "SBPUBK_QNDPOCYSHON9MHKOONJHWTHGFZV1BNJJ"
+SEERBIT_SECRET_KEY = "SBSECK_I9NYR2NJKIMCNIRUZPWM5ZGWYS5RXB43SDBW2ZYL"
+DOMAIN = "https://ticketcustodian.onrender.com/"  # change in production
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

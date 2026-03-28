@@ -99,12 +99,15 @@ def create_purchase_view(request, ticket_id):
 def seerbit_callback(request, purchase_id):
     reference = request.GET.get("PaymentReference")
 
-    purchase = get_purchase_by_id_and_reference(purchase_id, reference)
+
+
+    purchase = get_purchase_by_reference(reference)
 
     if not purchase:
         return render(request, "Payment_error.html")
 
     res = verify_payment(reference)
+
 
     if res.get("status") == "SUCCESS" and res["data"]["payments"]["status"] == "SUCCESS":
         mark_as_paid(purchase)

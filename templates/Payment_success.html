@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success text-center" role="alert">
+        <h2>Payment Successful</h2>
+        <p>Thank you for your purchase!</p>
+        <p>A receipt has been sent to {{ purchase.email }}</p>
+        
+        <div class="mt-4">
+            <h5>Purchase Details</h5>
+            <p><strong>Name:</strong> {{ purchase.first_name }} {{ purchase.last_name }}</p>
+            <p><strong>Email:</strong> {{ purchase.email }}</p>
+            <p><strong>Ticket:</strong> {{ purchase.ticket.name }}</p>
+            <p><strong>Currency:</strong> {{ purchase.currency }}</p>
+            <p><strong>Reference:</strong> {{ purchase.payment_reference }}</p>
+        </div>
+        
+        <a href="{% url 'ticket_list' %}" class="btn btn-primary mt-3">Back to Tickets</a>
+    </div>
+</div>
+{% endblock %}
