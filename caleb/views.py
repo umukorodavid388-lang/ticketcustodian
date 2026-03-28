@@ -86,7 +86,13 @@ def create_purchase_view(request, ticket_id):
             "email": request.POST.get("email"),
             "phone": request.POST.get("phone"),
             "currency": request.POST.get("currency"),
+            "country": request.POST.get("country"),
+            "state": request.POST.get("state"),
+            "how_did_you_hear": request.POST.get("how_did_you_hear"),
         }
+
+        if not all([data["first_name"], data["last_name"], data["email"], data["phone"], data["currency"], data["country"], data["state"], data["how_did_you_hear"]]):
+            return render(request, "Payment_error.html", {"message": "Please complete all required fields."})
 
         res, purchase = create_ticket_purchase(ticket, data)
 
@@ -96,23 +102,25 @@ def create_purchase_view(request, ticket_id):
         return render(request, "Payment_error.html", {"message": res})
 
 
+@csrf_exempt
 def seerbit_callback(request, purchase_id):
-    reference = request.GET.get("PaymentReference")
+    reference = request.GET.get("PaymentReference") or request.POST.get("PaymentReference") or request.POST.get("paymentReference")
 
+    if not reference:
+        return render(request, "Payment_error.html", {"message": "Missing payment reference in callback."})
 
-
-    purchase = get_purchase_by_reference(reference)
+    purchase = get_purchase_by_id_and_reference(purchase_id, reference)
 
     if not purchase:
-        return render(request, "Payment_error.html")
+        return render(request, "Payment_error.html", {"message": "Purchase not found or reference mismatch."})
 
     res = verify_payment(reference)
 
-
-    if res.get("status") == "SUCCESS" and res["data"]["payments"]["status"] == "SUCCESS":
-        mark_as_paid(purchase)
-        send_receipt_email(purchase)
+    if res.get("status") == "SUCCESS" and res.get("data", {}).get("payments", {}).get("status") == "SUCCESS":
+        if not purchase.is_paid:
+            mark_as_paid(purchase)
+            send_receipt_email(purchase)
 
         return render(request, "Payment_success.html", {"purchase": purchase})
 
-    return render(request, "Payment_error.html")
+    return render(request, "Payment_error.html", {"message": "Payment verification failed."})

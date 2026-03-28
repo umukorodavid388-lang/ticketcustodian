@@ -27,6 +27,9 @@ def create_ticket_purchase(ticket, data):
         "email": data["email"],
         "phone": data["phone"],
         "currency": currency,
+        "country": data.get("country", ""),
+        "state": data.get("state", ""),
+        "how_did_you_hear": data.get("how_did_you_hear", ""),
         "ticket": ticket,
         "payment_reference": payment_reference,
         "expires_at": timezone.now() + timedelta(minutes=15)
